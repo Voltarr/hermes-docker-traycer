@@ -33,7 +33,7 @@ Running Hermes inside a Docker sandbox on macOS solves security, but historicall
 ## Prerequisites (What to install first)
 
 Before running the installer, ensure you have:
-1. **Docker Desktop for Mac:** Installed and running. ([Download Docker Desktop](https://www.docker.com/products/docker-desktop/))
+1. **Docker Desktop for Mac:** Installed and running ([Download Docker Desktop](https://www.docker.com/products/docker-desktop/) — be sure to choose "Mac with Intel chip" or "Mac with Apple chip" matching your computer).
 2. **Traycer:** Installed on macOS. ([Download Traycer](https://traycer.ai))
 3. **An API Key or Local LLM:**
    - **Cloud (Recommended):** A free [Google AI Studio](https://aistudio.google.com) API key for Gemini 3.7 Flash.
