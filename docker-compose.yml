@@ -1,0 +1,11 @@
+services:
+  hermes-sandbox:
+    image: nousresearch/hermes-agent:stable
+    container_name: hermes-sandbox
+    restart: unless-stopped
+    volumes:
+      - ~/.hermes-docker:/opt/data
+      - ~/.openclaw/workspace:/workspace
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    command: gateway run
