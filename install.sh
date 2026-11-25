@@ -57,11 +57,17 @@ docker exec hermes-sandbox python3 -c '
 # Patch discovery permissions for virtiofs
 p1 = "/opt/hermes/hermes_cli/gateway_runtime_discovery.py"
 try:
-    with open(p1, "r") as f: c1 = f.read()
-    old1 = "    if not home and mode & 0o077:\n        raise _open_mode(path, mode, 0o700 if kind == \"directory\" else 0o600)"
-    new1 = "    if not home and mode & 0o077:\n        pass  # Docker Desktop virtiofs fakeowner compatibility"
-    if old1 in c1:
-        with open(p1, "w") as f: f.write(c1.replace(old1, new1))
+    with open(p1, "r") as f: lines = f.readlines()
+    out = []
+    modified = False
+    for line in lines:
+        if "raise _open_mode" in line:
+            out.append("        pass  # Docker Desktop virtiofs fakeowner compatibility\n")
+            modified = True
+        else:
+            out.append(line)
+    if modified:
+        with open(p1, "w") as f: f.writelines(out)
 except Exception: pass
 
 # Patch cwd path translation for macOS host workspaces
