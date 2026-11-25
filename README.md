@@ -68,12 +68,13 @@ Ensure Docker Desktop is open, then run:
 ### Step 3: Link to Traycer
 1. Open **Traycer** and sign in to your Traycer account (under **Settings ➔ Account**). When signing in via your browser, confirm the device verification code matches what is displayed in the Traycer desktop app, then click **Approve / Confirm** in the browser.
 2. Click **Settings ➔ Providers ➔ Hermes Agent ➔ CLI & Args**.
-3. Under Path, click **+ Add custom path** and enter:
+3. Toggle the switch in the upper-right corner to **Enabled** (if disabled).
+4. Under Path, click **+ Add custom path** and enter:
    ```
    /Users/YOUR_USERNAME/bin/hermes-docker
    ```
    *(Or click Browse and select `bin/hermes-docker` in your home directory).*
-4. Toggle the switch at the top right to **Enabled**.
+5. Select the radio button next to your custom path.
 
 ### Step 4: Configure Your Model (Google Gemini or Ollama)
 When you select Hermes Agent in Traycer's model dropdown:
