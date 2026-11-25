@@ -1,16 +1,18 @@
 #!/usr/bin/env bash
 set -e
-#!/usr/bin/env bash
-set -e
+
+# Always resolve script directory so drag-and-drop from anywhere works
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR"
 
 # Auto-detect Docker CLI in standard Mac paths if not in PATH
 if ! command -v docker >/dev/null 2>&1; then
-    if [ -x /Applications/Docker.app/Contents/Resources/bin/docker ]; then
-        export PATH=/Applications/Docker.app/Contents/Resources/bin:/Users/openclaw/.openclaw/tmp/agent-cli:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/opt/homebrew/bin:/opt/homebrew/Cellar/node/26.13.1_2/bin:/opt/homebrew/opt/node/bin:/opt/homebrew/sbin:/Users/openclaw/Library/pnpm:/Users/openclaw/.local/bin:/Users/openclaw/.docker/bin
-    elif [ -x /Users/openclaw/.docker/bin/docker ]; then
-        export PATH=/Users/openclaw/.docker/bin:/Users/openclaw/.openclaw/tmp/agent-cli:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/opt/homebrew/bin:/opt/homebrew/Cellar/node/26.13.1_2/bin:/opt/homebrew/opt/node/bin:/opt/homebrew/sbin:/Users/openclaw/Library/pnpm:/Users/openclaw/.local/bin:/Users/openclaw/.docker/bin
-    elif [ -x /usr/local/bin/docker ]; then
-        export PATH=/usr/local/bin:/Users/openclaw/.openclaw/tmp/agent-cli:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/opt/homebrew/bin:/opt/homebrew/Cellar/node/26.13.1_2/bin:/opt/homebrew/opt/node/bin:/opt/homebrew/sbin:/Users/openclaw/Library/pnpm:/Users/openclaw/.local/bin:/Users/openclaw/.docker/bin
+    if [ -x "/Applications/Docker.app/Contents/Resources/bin/docker" ]; then
+        export PATH="/Applications/Docker.app/Contents/Resources/bin:$PATH"
+    elif [ -x "$HOME/.docker/bin/docker" ]; then
+        export PATH="$HOME/.docker/bin:$PATH"
+    elif [ -x "/usr/local/bin/docker" ]; then
+        export PATH="/usr/local/bin:$PATH"
     fi
 fi
 
@@ -38,14 +40,14 @@ fi
 # 3. Launch container if not running
 if ! docker ps --format '{{.Names}}' | grep -q '^hermes-sandbox$'; then
     echo "Starting hermes-sandbox container via docker compose..."
-    docker compose up -d
+    docker compose -f "$SCRIPT_DIR/docker-compose.yml" up -d
     echo "Waiting 5 seconds for gateway to initialize..."
     sleep 5
 fi
 echo "✓ hermes-sandbox container is active"
 
 # 4. Copy bridge wrapper to ~/bin
-cp hermes-docker "$HOME/bin/hermes-docker"
+cp "$SCRIPT_DIR/hermes-docker" "$HOME/bin/hermes-docker"
 chmod 755 "$HOME/bin/hermes-docker"
 echo "✓ Installed bridge wrapper to $HOME/bin/hermes-docker"
 
