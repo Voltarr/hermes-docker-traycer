@@ -66,7 +66,7 @@ Ensure Docker Desktop is open, then run:
 - Flushes the background `traycer-host` daemon cache.
 
 ### Step 3: Link to Traycer
-1. Open **Traycer**.
+1. Open **Traycer** and sign in to your Traycer account (under **Settings ➔ Account**).
 2. Click **Settings ➔ Providers ➔ Hermes Agent ➔ CLI & Args**.
 3. Under Path, click **+ Add custom path** and enter:
    ```
