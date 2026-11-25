@@ -49,7 +49,7 @@ Clone the repository or download the turnkey bundle:
 git clone https://github.com/Voltarr/hermes-docker-traycer.git
 cd hermes-docker-traycer
 ```
-*(Or unzip `agentjail-bundle.zip` and `cd` into the folder).*
+*(Note: If you downloaded `agentjail-bundle.zip`, macOS places it in `~/Downloads` by default. Unzip it and run `cd ~/Downloads/agentjail-bundle`. If your browser saves downloads to your Desktop or a custom folder, adjust the `cd` path to match where you unzipped it, e.g. `cd ~/Desktop/agentjail-bundle`).*
 
 ### Step 2: Run the 1-Click Installer
 Ensure Docker Desktop is open, then run:
