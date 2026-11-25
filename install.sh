@@ -1,5 +1,18 @@
 #!/usr/bin/env bash
 set -e
+#!/usr/bin/env bash
+set -e
+
+# Auto-detect Docker CLI in standard Mac paths if not in PATH
+if ! command -v docker >/dev/null 2>&1; then
+    if [ -x /Applications/Docker.app/Contents/Resources/bin/docker ]; then
+        export PATH=/Applications/Docker.app/Contents/Resources/bin:/Users/openclaw/.openclaw/tmp/agent-cli:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/opt/homebrew/bin:/opt/homebrew/Cellar/node/26.13.1_2/bin:/opt/homebrew/opt/node/bin:/opt/homebrew/sbin:/Users/openclaw/Library/pnpm:/Users/openclaw/.local/bin:/Users/openclaw/.docker/bin
+    elif [ -x /Users/openclaw/.docker/bin/docker ]; then
+        export PATH=/Users/openclaw/.docker/bin:/Users/openclaw/.openclaw/tmp/agent-cli:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/opt/homebrew/bin:/opt/homebrew/Cellar/node/26.13.1_2/bin:/opt/homebrew/opt/node/bin:/opt/homebrew/sbin:/Users/openclaw/Library/pnpm:/Users/openclaw/.local/bin:/Users/openclaw/.docker/bin
+    elif [ -x /usr/local/bin/docker ]; then
+        export PATH=/usr/local/bin:/Users/openclaw/.openclaw/tmp/agent-cli:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/opt/homebrew/bin:/opt/homebrew/Cellar/node/26.13.1_2/bin:/opt/homebrew/opt/node/bin:/opt/homebrew/sbin:/Users/openclaw/Library/pnpm:/Users/openclaw/.local/bin:/Users/openclaw/.docker/bin
+    fi
+fi
 
 echo "=========================================================="
 echo "  AgentJail: Hermes Docker Sandbox Bridge for macOS & Traycer"
