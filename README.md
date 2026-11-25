@@ -101,3 +101,22 @@ Included in this repository is the [AI Reasoning & Intelligence Levels Cheat She
 
 ## License
 MIT License. Created by Derek (@Voltarr) for GreenlitCrew.
+
+---
+
+## Model Setup Walkthrough (What to Expect During Setup)
+
+When configuring your model via the interactive wizard ( or Traycer's terminal prompt), here is the exact sequence of screens you will encounter:
+
+1. **Provider Selection:**
+   - Select **Google AI Studio** *(Native Gemini API)*, or your preferred cloud/local provider.
+2. **API Key Prompt:**
+   - Paste your API key (characters will mask as ) and press **Enter**.
+3. **Base URL Confirmation:**
+   - Press **Enter** to accept the default endpoint: .
+4. **Model Selection:**
+   - Use the **Up/Down arrow keys** to navigate to  and press **Enter**.
+5. **Reasoning Effort Selection:**
+   - Select **** (recommended sweet spot for speed and depth) and press **Enter**.
+6. **Completion:**
+   - The wizard will print  and return you to the shell prompt.
