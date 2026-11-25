@@ -72,12 +72,13 @@ try:
         old2 = "    return translate_cwd_for_wsl_backend(str(cwd))"
         new2 = """    translated = translate_cwd_for_wsl_backend(str(cwd))
     if os.path.isdir(translated): return translated
-    if str(translated).startswith("/Users/"):
-        cand = "/workspace"
+    if str(translated).startswith('/Users/'):
+        cand = '/workspace'
         if os.path.isdir(cand): return cand
-    if os.path.isdir("/workspace"): return "/workspace"
-    if os.path.isdir("/opt/data"): return "/opt/data"
-    return "/""""
+    if os.path.isdir('/workspace'): return '/workspace'
+    if os.path.isdir('/opt/data'): return '/opt/data'
+    return '/'
+"""
         with open(p2, "w") as f: f.write(c2.replace(old2, new2))
 except Exception: pass
 
