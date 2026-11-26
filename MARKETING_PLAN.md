@@ -15,6 +15,11 @@ Platforms like Traycer are announcing *"Software Factory coming soon."* The AI c
 **Traycer is the management office; it is NOT the containment chamber.**
 When an autonomous agent runs tasks, it executes shell commands, edits files, and installs packages. Running these tasks natively on macOS gives an autonomous agent **raw root-level access** to personal files, SSH keys, credentials, and local networks.
 
+### Security Grounding (OWASP LLM-08):
+AgentJail directly solves the **OWASP Top 10 for LLM Applications — LLM-08: Excessive Agency**:
+- Running agents natively on macOS gives an autonomous LLM excessive agency over your host system.
+- AgentJail mitigates this by restricting tool execution to an unprivileged container (non-root UID 502) with strict mount boundaries.
+
 ### The AgentJail Solution:
 **"Keep the UI on your Mac. Trap the agent in Docker."**
 AgentJail provides the hardened, sandboxed steel floor underneath Traycer and Hermes Agent. It bridges macOS UI orchestration with isolated Linux execution on Docker, with zero permission errors and automatic Apple Silicon & Intel support.

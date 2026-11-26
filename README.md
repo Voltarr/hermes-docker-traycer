@@ -22,6 +22,27 @@ Running Hermes inside a Docker sandbox on macOS solves security, but historicall
 
 ---
 
+## Security Architecture & OWASP Compliance
+
+> **"Mitigates OWASP LLM-08 (Excessive Agency) by quarantining autonomous agent tool execution inside an unprivileged Docker container."**
+
+- **The Problem:** Running autonomous LLM coding agents natively on macOS violates core AI safety principles. An agent with raw host terminal access can execute destructive commands (`rm -rf`), access private keys (`~/.ssh`), or exfiltrate credentials.
+- **The Mitigation:** AgentJail adheres to the **OWASP Top 10 for LLM Applications (LLM-08: Excessive Agency)**:
+  - **Unprivileged Non-Root Execution:** Hermes runs strictly as user `hermes` (UID 502), never root.
+  - **Filesystem Confinement:** Isolated to `/workspace` and container volumes; personal host files, SSH keys, and system binaries remain completely untouchable.
+  - **100% Auditable & Transparent:** Zero opaque compiled binary installers. Every line of `install.sh` and `hermes-docker` is plain-text, open-source POSIX shell. Docker images pull directly from Nous Research's verified public repository.
+
+---
+
+## System Requirements & Compatibility
+
+- **macOS:** macOS 13 (Ventura), macOS 14 (Sonoma), or macOS 15 (Sequoia).
+  *(macOS 12 Monterey via OCLP is community-supported; macOS 11 Big Sur and older are not supported).*
+- **Hardware:** Apple Silicon (M1, M2, M3, M4) and Intel Macs (Core i5, i7, i9, Xeon) — auto-detected!
+- **Software Prerequisites:** Docker Desktop for Mac installed and running; Traycer desktop app installed.
+
+---
+
 ## Hardware & Architecture Compatibility
 
 - **Apple Silicon Macs:** M1, M2, M3, M4 (Native `arm64` container)
