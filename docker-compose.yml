@@ -3,6 +3,8 @@ services:
     image: nousresearch/hermes-agent:stable
     container_name: hermes-sandbox
     restart: unless-stopped
+    environment:
+      - HERMES_WRITE_SAFE_ROOT=/opt/data:/workspace
     volumes:
       - ~/.hermes-docker:/opt/data
       - ~/.openclaw/workspace:/workspace
