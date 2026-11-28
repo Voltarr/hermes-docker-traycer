@@ -43,6 +43,14 @@ Running Hermes inside a Docker sandbox on macOS solves security, but historicall
 
 ---
 
+## Windows 11 Support
+
+AgentJail also supports **Windows 11** via Docker Desktop (WSL2 backend):
+- Run  in PowerShell.
+- Traycer custom path: .
+
+---
+
 ## Hardware & Architecture Compatibility
 
 - **Apple Silicon Macs:** M1, M2, M3, M4 (Native `arm64` container)
